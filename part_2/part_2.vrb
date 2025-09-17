@@ -1,0 +1,23 @@
+\frametitle{Structurer un programme}
+
+  \texttt{module1.py}
+\begin{lstlisting}[language=python, numbers=none]
+import math
+import sys
+
+def prod(a, b):
+    return a * b
+
+def add(a, b):
+    return a + b
+\end{lstlisting}
+
+\texttt{main.py}
+
+\begin{lstlisting}[language=python, numbers=none]
+from module1 import add, prod
+print(add(1, 2))
+print(prod(1, 2))
+\end{lstlisting}
+
+

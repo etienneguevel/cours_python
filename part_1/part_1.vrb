@@ -1,0 +1,5 @@
+\frametitle{Installer des IDEs}
+Les IDEs sont des environnements de développement intégrés (Integrated Development Environment) qui permettent de faciliter la création de programmes.
+  \begin{center}
+    \includegraphics[width=\textwidth]{img/vscode.png}
+  \end{center}
