@@ -1,8 +1,8 @@
-PWD /home/etienneguevel/Documents/cours/cours_python/cours_2025/part_1
+PWD /Users/etienneguevel/Documents/cours/cours_2025/part_1
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /home/etienneguevel/Documents/cours/cours_python/cours_2025/part_1/part_1.tex
+INPUT /Users/etienneguevel/Documents/cours/cours_2025/part_1/part_1.tex
 OUTPUT part_1.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/beamer/beamer.cls
@@ -164,6 +164,9 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/atveryend/atveryend.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
