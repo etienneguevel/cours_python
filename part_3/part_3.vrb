@@ -1,0 +1,22 @@
+\frametitle{Fonction \texttt {super}}
+\begin{lstlisting}[numbers=none, morekeywords={Person, super}]
+class Person():
+    def __init__(self, firstname, lastname):
+        self.firstname = firstname
+        self.lastname = lastname
+
+    def __str__(self):
+        return f"{self.firstname} {self.lastname}"
+
+class Student(Person):
+    def __init__(self, firstname, lastname, university):
+        Person.__init__(self, firstname, lastname)
+
+        self.university = university
+
+
+
+
+    def get_university(self):
+        return self.university
+\end{lstlisting}
