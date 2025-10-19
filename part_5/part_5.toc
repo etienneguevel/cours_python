@@ -1,0 +1,5 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Rappels}{3}{0}{1}
+\beamer@sectionintoc {2}{Packaging}{8}{0}{2}
+\beamer@sectionintoc {3}{Tests unitaires}{16}{0}{3}
+\beamer@sectionintoc {4}{Qualité de code}{35}{0}{4}

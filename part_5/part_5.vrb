@@ -1,0 +1,11 @@
+\frametitle{A vous de jouer}
+
+  \begin{enumerate}
+    \item Placez-vous à la racine de votre package et exécutez \texttt{pylint}
+\begin{lstlisting}[numbers=none]
+python -m pylint mypackage
+\end{lstlisting}
+    \item Quelle est votre note sur 10 ?
+    \item Améliorez votre code et exécutez à nouveau \texttt{pylint}
+  \end{enumerate}
+

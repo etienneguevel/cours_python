@@ -1,0 +1,4 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Librairies scientifiques : SciPy, NumPy}{4}{0}{1}
+\beamer@sectionintoc {2}{Librairies Pandas pour le traitement de données}{13}{0}{2}
+\beamer@sectionintoc {3}{Visualisation de données : Matplotlib}{22}{0}{3}

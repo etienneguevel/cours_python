@@ -1,0 +1,845 @@
+\documentclass[10pt]{beamer}
+
+
+
+\input{includes}
+\input{header}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{}
+  \centering
+  \Large
+  \textbf{Partie 3}
+
+  \textbf{Librairies scientifiques et visualisation de données}
+\end{frame}
+
+
+\begin{frame}{Most common libraries in Data Science}
+
+  \begin{block}{Data manipulation libraries}
+    \begin{itemize}
+      \item \texttt{Numpy}: matrices and multi-dimensional arrays
+      \item \texttt{Pandas}: data manipulation and analysis vis
+    \end{itemize}
+  \end{block}
+    \begin{block}{Data visualization libraries}
+      \begin{itemize}
+        \item \texttt{matplotlib}: unavoidable library
+        \item \texttt{seaborn}: high-level interface of \texttt{matplotlib}
+      \end{itemize}
+    \end{block}
+  \end{frame}
+
+
+\section{Librairies scientifiques : SciPy, NumPy}
+
+\begin{frame}{Librarie SciPy}
+  \begin{center}
+    \includegraphics[width=\textwidth]{img/scipy.png}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}{Librarie NumPy}
+  \begin{block}{Librarie dédiées au calcul scientifique}
+    \medskip
+    \texttt{NumPy} est la librairie de référence pour le calcul scientifique.
+
+    \begin{itemize}
+      \item Structure de données représentant des tableaux multidimensionnels \texttt{ndarray}
+      \item Un ensemble très complet de routines permettant des opérations optimisées sur des tableaux
+      \item Exemples : opérations mathématiques et logiques, tris, algèbre linéaire, opérations statistiques, simulations aléatoires, etc.
+    \end{itemize}
+  \end{block}
+  Documentation : \url{https://numpy.org/doc/stable/user/absolute_beginners.html}
+\end{frame}
+
+
+\begin{frame}[fragile]{Installation et import}
+
+  \begin{block}{Librairie intégrée au projet Anaconda}
+
+\begin{lstlisting}[numbers=none]
+pip install numpy
+\end{lstlisting}
+
+ou bien 
+
+\begin{lstlisting}[numbers=none]
+conda install numpy
+\end{lstlisting}
+
+\end{block}
+  
+\begin{block}{Convention d'import}
+
+\begin{lstlisting}[language=python, numbers=none, morekeywords=as]
+import numpy as np
+\end{lstlisting}
+
+\end{block}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Concepts clés}
+
+\begin{block}{Création d'un objet \texttt{ndarray} à partir d'un objet itérable}
+
+\begin{lstlisting}[language=python, numbers=none]
+arr = np.array(<iterable>)
+\end{lstlisting}
+
+\end{block}
+
+Par exemple :
+\begin{block}{Création d'un objet \texttt{ndarray} à partir d'un objet itérable}
+
+\begin{lstlisting}[language=python, numbers=none]
+>>> arr = np.array([])
+>>> arr = np.array([1, 2])
+>>> arr = np.array([[1, 2], [3, 4]])
+>>> arr = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+\end{lstlisting}
+
+\end{block}
+
+{\small
+Lien vers la documentation : \href{https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html}{numpy.ndarray.html}}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Concepts clés}
+
+  \begin{block}{Attribut \texttt{shape}}
+\begin{lstlisting}[language=python, numbers=none]
+>>> arr = np.array([])
+>>> arr.shape
+(0,)
+>>> arr = np.array([1, 2])
+>>> arr.shape
+(2,)
+>>> arr = np.array([[1, 2], [3, 4]])
+>>> arr.shape
+(2, 2)
+>>> arr = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+>>> arr.shape
+(2, 2, 2)
+\end{lstlisting}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Concepts clés}
+
+  \begin{block}{Indexing et slicing, arrays 1D}
+
+\begin{lstlisting}[language=python, numbers=none]
+>>> data = np.array([1, 2, 3])
+
+>>> data[1]
+2
+
+>>> data[0:2]
+array([1, 2])
+
+>>> data[1:]
+array([2, 3])
+
+>>> data[-2:]
+array([2, 3])
+\end{lstlisting}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Concepts clés}
+
+  \begin{block}{Indexing et slicing, arrays $>$ 2D}
+
+\begin{lstlisting}[language=python, numbers=none]
+>>> arr = np.array([[1, 2], [3, 4], [5, 6]])
+
+>>> arr.shape
+(3, 2)
+
+>>> arr[0, 1]
+2
+
+>>> arr[1:3]
+array([[3, 4],
+       [5, 6]])
+
+>>> arr[1:3, 0]
+array([3, 5])
+\end{lstlisting}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}{Types de données intégrés à \texttt{NumPy}}
+
+  \begin{itemize}
+    \item Entier 64-bits \texttt{np.int64}
+    \item Entier 32-bits \texttt{np.int32}
+    \item Flottant 32-bits \texttt{np.float32}
+    \item Nombre complexe \texttt{np.complex}
+    \item Booléen \texttt{np.bool}
+    \item Le type de base \texttt{np.object}
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+\section{Librairies Pandas pour le traitement de données}
+
+
+
+\begin{frame}{\includegraphics[width=.15\textwidth]{img/pandas_logo}}
+  
+  \begin{block}{En bref}
+    \medskip
+    Pandas est une librairie performante dédiée à la manipulation de données et à l'analyse de données
+  \end{block}
+
+  \begin{block}{Liens utiles}
+    \begin{itemize}
+      \item Documentation officielle : \href{https://pandas.pydata.org/}{pandas.pydata.org}
+      \item Pour commencer : \href{https://pandas.pydata.org/getting_started.html}{pandas.pydata.org/getting\_started}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Installation et import}
+
+  \begin{block}{Librairie intégrée au projet Anaconda}
+
+\begin{lstlisting}[numbers=none]
+pip install pandas
+\end{lstlisting}
+
+ou bien 
+
+\begin{lstlisting}[numbers=none]
+conda install pandas
+\end{lstlisting}
+
+\end{block}
+  
+\begin{block}{Convention d'import}
+
+\begin{lstlisting}[language=python, numbers=none, morekeywords=as]
+import pandas as pd
+\end{lstlisting}
+
+\end{block}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{\includegraphics[width=.15\textwidth]{img/pandas_logo} How to...}
+
+  \begin{block}{Créer un tableau de données}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+import pandas as pd
+data = [['Mary', 968], ['Jessica', 155], ['Bob', 578]]
+df = pd.DataFrame(data=data, columns=['Names', 'Births'])
+\end{lstlisting}
+  \end{block}
+
+  \begin{columns}[T]
+    \begin{column}{.48\textwidth}
+      \begin{block}{Structure de données \texttt{DataFrame}}
+        \begin{itemize}
+          \item Indices sur les lignes et sur les colonnes
+          \item Données de types différents
+        \end{itemize}
+      \end{block}
+    \end{column}
+
+    \begin{column}{.48\textwidth}
+      \begin{center}
+        \includegraphics[width=.5\textwidth]{img/pandas_0}
+      \end{center}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]{\includegraphics[width=.15\textwidth]{img/pandas_logo} How to...}
+
+  \begin{block}{Lire un fichier CSV}
+
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+# Create a DataFrame from a CSV file
+df = pd.read_csv("path/to/data.csv")
+\end{lstlisting}
+  \end{block}
+
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{img/pandas_1}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{\includegraphics[width=.15\textwidth]{img/pandas_logo} How to...}
+
+  \begin{block}{Décrire les données}
+
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+# Print the first 10 rows
+print(df.head(10))
+
+# Describe the data: mean, max, min, median, etc.
+print(df.describe())
+\end{lstlisting}
+  \end{block}
+
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{img/pandas_3}
+  \end{center}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{\includegraphics[width=.15\textwidth]{img/pandas_logo} How to...}
+
+  \begin{block}{Sélectionner un sous-ensemble}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+# Use the attribute loc
+df.loc[[1, 3], ["date", "weather", "temp_max", "temp_min"]]
+
+# Use ':' for selecting all the rows
+df.loc[:, ["date", "weather", "temp_max", "temp_min"]]
+\end{lstlisting}
+  \end{block}
+
+  \begin{center}
+    \includegraphics[width=.5\textwidth]{img/pandas_2}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{\includegraphics[width=.15\textwidth]{img/pandas_logo} How to...}
+
+  \begin{block}{Trier}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+# Sort w.r.t the value of "temp_max"
+df.sort_values(by="temp_max", ascending=True)
+\end{lstlisting}
+  \end{block}
+
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{img/pandas_4}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{\includegraphics[width=.15\textwidth]{img/pandas_logo} How to...}
+
+  \begin{block}{Grouper et combiner}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+# Create a "groupby" object, i.e. split
+gb = df.groupby("month")
+
+# Compute the mean values for each group, i.e. combine
+gb.mean()
+
+# Or using another combine function f
+gb.apply(f)
+\end{lstlisting}
+  \end{block}
+
+  \begin{center}
+    \includegraphics[width=.7\textwidth]{img/pandas_5}
+  \end{center}
+\end{frame}
+
+
+  
+  
+  
+  
+  
+  \section{Visualisation de données : Matplotlib}
+  
+  
+  \begin{frame}{\includegraphics[width=.2\textwidth]{img/logo_matplotlib}}
+  
+    \begin{block}{En bref}
+      \medskip
+    Matplotlib est LA librairie incontournable pour visualiser des données
+    \end{block}
+  
+    \begin{block}{Liens utiles}
+      \begin{itemize}
+        \item Site  officiel : \href{https://matplotlib.org/}{matplotlib.org}
+        \item {\it Third party packages} : \href{https://matplotlib.org/stable/thirdpartypackages/index.html}{matplotlib.org/stable/thirdpartypackages}
+        \item Exemples : \href{https://matplotlib.org/stable/gallery/index.html}{matplotlib.org/stable/gallery}
+        \item Tutoriel : \href{https://github.com/matplotlib/AnatomyOfMatplotlib}{github.com/matplotlib/AnatomyOfMatplotlib}
+      \end{itemize}
+    \end{block}
+  
+  \end{frame}
+  
+  
+  
+
+  \begin{frame}[fragile]{\includegraphics[width=.2\textwidth]{img/logo_matplotlib}}
+  
+    \begin{columns}[T]
+      \begin{column}{.48\textwidth}
+        \begin{block}{Concepts}
+          \begin{itemize}
+            \item Objet de classe ``Figure''
+            \item Objet de classe ``Axes''
+            \item Plusieurs graphiques sur une même figure : Subplots
+          \end{itemize}
+        \end{block}
+      \end{column}
+  
+      \begin{column}{.48\textwidth}
+        \begin{center}
+          \includegraphics[width=\textwidth]{img/Figure_Axes}
+        \end{center}
+      \end{column}
+    \end{columns}
+
+    \begin{block}{Convention d'import}
+\begin{lstlisting}[language=Python, numbers=none]
+import matplotlib.pyplot as plt
+\end{lstlisting}
+    \end{block}
+
+  \end{frame}
+
+
+  \begin{frame}[fragile]{\includegraphics[width=.2\textwidth]{img/logo_matplotlib.png} Figures, Axes}
+  
+      \begin{block}{Figure}
+          \begin{itemize}
+            \item La ``fenêtre'' contenant tous les objets composant le ou les graphiques
+            \item Un objet Figure peut contenir : titre, sous-titre, légende, etc.
+            \item Une figure est créée comme suit :
+          \end{itemize}
+      \end{block}
+\begin{lstlisting}[language=Python, numbers=none]
+fig = plt.figure()
+\end{lstlisting}
+  
+    \begin{block}{Axes}
+        \begin{itemize}
+          \item Dans une figure, on ajoute un ou plusieurs objets \textcolor{orange}{Axes}
+          \item Un tel objet est une \textcolor{orange}{r\'egion} de l'image qui recevra les \textcolor{orange}{donn\'es à visualiser}
+          \item Une figure peut contenir plusieurs axes
+          \item Un axe contient deux ou trois objets \textcolor{orange}{Axis}
+        \end{itemize}
+    \end{block}
+  \end{frame}
+
+
+  
+  
+  \begin{frame}[fragile]{\includegraphics[width=.2\textwidth]{img/logo_matplotlib} Figures and Axes}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+import matplotlib.pyplot as plt
+
+fig = plt.figure() # Create the Figure object
+
+# Add an Axe to this figure
+ax = fig.add_axes([0.5,0.5,0.8,0.8]) # dimensions [left, bottom, width, height] of the new axes
+
+# Plot the distribution of the wind variable in the axe
+g1 = ax.hist(x=seattle_weather['wind'])
+
+# Add a title and labels for the x-axis and the y-axis
+ax.set_title("Histogram with default parameters")
+ax.set_xlabel("Wind")
+ax.set_ylabel("Count")
+
+plt.show() # Show the plot
+\end{lstlisting}
+  \end{frame}
+  
+  \begin{frame}[fragile]{\includegraphics[width=.2\textwidth]{img/logo_matplotlib} Figures and Axes}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+# Short version (using the fact that figure and axes are automatically created)
+
+import matplotlib.pyplot as plt
+
+# Plot the distribution of the wind using a histogram
+plt.hist(x=seattle_weather["wind"])
+
+# Add a title
+plt.title("Histogram with default parameters")
+
+# Add labels for the x-axis and the y-axis
+plt.xlabel("Wind")
+plt.ylabel("Count")
+
+plt.show() # Show the plot
+\end{lstlisting}
+  \end{frame}
+  
+  \begin{frame}{\includegraphics[width=.2\textwidth]{img/logo_matplotlib} Subplots}
+    \begin{block}{What is a subplot?}
+      \begin{itemize}
+        \item The matplotlib.pyplot.subplots method provides a way to have \textcolor{orange}{multiple plots on a single figure}
+        \item Given the number of rows and columns, it returns a tuple (fig, ax), giving a single figure `fig` with an array of axe `ax`
+      \end{itemize}
+    \end{block}
+    More details:
+    \begin{itemize}
+      \item \href{https://www.educative.io/edpresso/what-is-a-subplots-in-matplotlib}{educative.io/edpresso/what-is-a-subplots-in-matplotlib}
+      \item \href{https://matplotlib.org/stable/gallery/subplots_axes_and_figures/subplots_demo.html}{matplotlib.org/stable/gallery/subplots\_axes\_and\_figures}
+    \end{itemize}
+  \end{frame}
+  
+  
+  \begin{frame}[fragile]{\includegraphics[width=.2\textwidth]{img/logo_matplotlib} Subplots}
+  
+    \begin{block}{Usage 1}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+import matplotlib.pyplot as plt
+
+# Create a subplot with 1 row and 2 columns
+fig, (ax1, ax2) = plt.subplots(1, 2)
+
+# Hist on the 1st column
+ax1.hist(x)
+
+# Scatter on the 2nd column
+ax2.scatter(x, y)
+
+# Show the plot
+plt.show()
+\end{lstlisting}
+    \end{block}
+  
+  \end{frame}
+  
+  \begin{frame}[fragile]{\includegraphics[width=.2\textwidth]{img/logo_matplotlib} Subplots}
+  
+    \begin{block}{Usage 2}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+import matplotlib.pyplot as plt
+
+# Create the figure
+fig = plt.figure()
+
+# Create an histogram on the 1st subplot
+plt.subplot(121) # or plt.subplot(1, 2, 1)
+plt.hist(x)
+
+# Create scatter plot on the 2nd subplot
+plt.subplot(122) # or plt.subplot(1, 2, 2)
+plt.scatter(x, y)
+
+# Show the plot
+plt.show()
+\end{lstlisting}
+    \end{block}
+  
+  \end{frame}
+  
+  \begin{frame}[fragile]{\includegraphics[width=.2\textwidth]{img/logo_matplotlib} Some other useful methods}
+  
+    \begin{block}{Title and subtitle}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+import matplotlib.pyplot as plt
+
+plt.hist(x)
+
+plt.title("A title")
+
+plt.subtitle("A title")
+\end{lstlisting}
+    \end{block}
+  \end{frame}
+  
+  
+  \begin{frame}[fragile]{\includegraphics[width=.2\textwidth]{img/logo_matplotlib} Some other useful methods}
+  
+    \begin{block}{Legend}
+\begin{lstlisting}[language=Python, morekeywords={as}, numbers=none]
+import matplotlib.pyplot as plt
+
+plt.scatter(x1, y1, label="First scatter plot")
+
+plt.scatter(x2, y2, label="Second scatter plot")
+
+plt.legend(loc=1)
+\end{lstlisting}
+    \end{block}
+  \end{frame}
+  
+
+
+
+  \begin{frame}{Seaborn: high-level interface of matplotlib}
+
+    \begin{block}{Overview of seaborn}
+      \medskip
+      Seaborn is a \textcolor{blue}{complementary} library for Matplotlib, which provides a high-level \textcolor{blue}{interface} to draw \textcolor{blue}{statistical} graphics.
+  
+      It uses Pandas data frames
+    \end{block}
+  
+    \begin{block}{Useful links}
+      \medskip
+      \begin{itemize}
+        \item Gallery: \href{https://seaborn.pydata.org/examples/index.html}{seaborn.pydata.org/examples}
+        \item Tutorial: \href{https://seaborn.pydata.org/tutorial.html}{seaborn.pydata.org/tutorial}
+      \end{itemize}
+      
+    \end{block}
+  \end{frame}
+  
+  
+  
+  \begin{frame}{Seaborn: high-level interface of matplotlib}
+  
+    \begin{columns}[T]
+      \begin{column}{.25\textwidth}
+       \medskip
+       \centering
+       \textsc{Figure-level}
+       
+       vs
+       
+       \textsc{Axes-level}
+      \end{column}
+  
+      \begin{column}{.25\textwidth}
+        \medskip
+        \centering
+        \textsc{Relational}
+  
+        \textsc{Distributional}
+  
+        \textsc{Categorical}
+      \end{column}
+  
+    \end{columns}
+  
+    \centering
+    % \includegraphics[width=.7\textwidth]{img/seaborn-overview.png}
+\end{frame}
+  
+  
+  
+  
+  \begin{frame}[fragile,t]{Figure-level vs Axes-level functions}
+  
+    \begin{block}{Axes-level}
+      \medskip
+      Axes-level functions plots data onto a single matplotlib Axes object ax
+    \end{block}
+  
+\begin{lstlisting}[language=python, numbers=none]
+# creates a chart in an existing axes object
+sns.histplot(data=df, x="temperature", ax=ax)
+\end{lstlisting}
+  
+    \onslide<2>{
+      \begin{block}{Figure-level}
+        \medskip
+        Figure-level functions interface with matplotlib through a seaborn object that manages the figure.
+        
+        For each task, the figure-level function is an interface to various axes-level functions
+        
+        % For example, the figure-level function `displot` is an interface to the axes-level functions `histplot`, `kdeplot`, etc. see the figure below.
+      \end{block}
+    }
+    \begin{onlyenv}<2>
+\begin{lstlisting}[language=python, numbers=none]
+sns.displot(data=df, x="temperature", kind="hist")
+\end{lstlisting}    
+    \end{onlyenv}
+  \end{frame}
+  
+  
+  
+  
+  \begin{frame}{Figure-level vs Axes-level functions}
+  
+    \begin{columns}[T]
+      \begin{column}{.25\textwidth}
+       \medskip
+       \centering
+       \textsc{Figure-level}
+       
+       vs
+       
+       \textsc{Axes-level}
+      \end{column}
+  
+      \begin{column}{.25\textwidth}
+  
+      \end{column}
+  
+    \end{columns}
+  
+    \centering
+    \includegraphics[width=.7\textwidth]{img/seaborn-overview.png}
+  \end{frame}
+  
+  
+  \begin{frame}[fragile]{Same usage / Different tasks}
+  
+    \begin{block}{The functions have (almost) the same signature}
+      \medskip
+      \begin{itemize}
+        \item data: a pandas DataFrame
+        \item x, y: columns names in the data frame
+        \item hue: name of the column used to add colors
+        \item ax: maplotlib Axes object in which to draw the plot
+      \end{itemize}
+      
+    \end{block}
+  
+\begin{lstlisting}[language=python, numbers=none]
+# Scatter plot
+sns.scatterplot(data=df, x="time", y="temperature", ax=ax)
+
+# Line plot
+sns.lineplot(data=df, x="time", y="temperature", ax=ax)
+
+# Line plot, Figure-level function
+sns.relplot(data=df, x="time", y="temperature", kind="line")
+\end{lstlisting}
+  
+  \end{frame}
+  
+  \begin{frame}[fragile]{Statistical graphics}
+  
+    Seaborn integrates statistics into the graphics making easier the analysis of the data.
+  
+    \begin{itemize}
+      \item Automatic computation of statistics: mean, confidence interval, error bars, etc.
+      \item Automatic linear regression fitting
+    \end{itemize}
+    
+    \begin{center}
+      \includegraphics[width=.4\textwidth]{img/cat-error-bar.png}
+      \includegraphics[width=.4\textwidth]{img/reg-fit.png}
+    \end{center}
+  
+  \end{frame}
+  
+  \begin{frame}[fragile]{Figure aesthetics}
+    The aesthetics can be modified, helping the communication of insights
+  
+    The function \texttt{set\_theme} modifes the background, the color palette, the font, etc.
+
+\begin{lstlisting}[language=python, numbers=none]
+# Default theme
+sns.set_theme()
+
+# Dark background with a grid
+sns.set_theme(style="darkgrid")
+
+# White background with a grid
+sns.set_theme(style="whitegrid", palette="pastel")
+\end{lstlisting}
+    
+    \begin{center}
+      \includegraphics[width=.3\textwidth]{img/set-theme-1.png}
+      \includegraphics[width=.3\textwidth]{img/set-theme-2.png}
+      \includegraphics[width=.3\textwidth]{img/set-theme-3.png}
+    \end{center}
+  
+  \end{frame}
+
+
+  
+  
+  
+  \begin{frame}[fragile]{Some examples}
+  
+    \begin{block}{Plotting distributions}
+\begin{lstlisting}[language=python, numbers=none]
+# Axes-level histogram
+sns.histplot(x="value", hue="variable", data=df)
+
+# Figure-level histogram
+sns.displot(x="value", hue="variable", data=df)
+\end{lstlisting}
+    \end{block}
+  
+    \begin{center}
+      \includegraphics[width=.4\textwidth]{img/hist_axe.png}
+      \includegraphics[width=.4\textwidth]{img/hist_figure.png}
+    \end{center}
+  
+  \end{frame}
+  
+\begin{frame}[fragile]{Some examples}
+  
+  \begin{block}{Plotting distributions}
+\begin{lstlisting}[language=python, numbers=none]
+# Axes-level histogram
+sns.kdeplot(x="value", hue="variable", data=df)
+
+# Figure-level histogram
+sns.displot(x="value", hue="variable", data=df, kind="kde")
+\end{lstlisting}
+  \end{block}
+  
+  \begin{center}
+    \includegraphics[width=.4\textwidth]{img/kde_axe.png}
+    \includegraphics[width=.4\textwidth]{img/kde_figure.png}
+  \end{center}
+
+\end{frame}
+
+  
+  
+  \begin{frame}[fragile]{Some examples}
+  
+    \begin{block}{}
+\begin{lstlisting}[language=python, numbers=none]
+# Pairplot / Matrix of scatterplots
+sns.pairplot(x)
+
+# Joint plot
+sns.jointplot(x)
+\end{lstlisting}
+    \end{block}
+  
+    \begin{center}
+      \includegraphics[width=.4\textwidth]{img/scatterplot_matrix}
+      \includegraphics[width=.4\textwidth]{img/joint}
+    \end{center}
+  
+\end{frame}
+
+
+    
+% \begin{frame}{Seaborn: high-level interface of matplotlib}
+%   \begin{center}
+%     \includegraphics[width=\textwidth]{img/seaborn-cheat.png}
+%   \end{center}
+%   \tiny{Source: interactivechaos.com}
+% \end{frame}
+
+
+
+
+\end{document}

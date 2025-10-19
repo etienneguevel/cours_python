@@ -1,0 +1,17 @@
+\frametitle{Some examples}
+
+    \begin{block}{}
+\begin{lstlisting}[language=python, numbers=none]
+# Pairplot / Matrix of scatterplots
+sns.pairplot(x)
+
+# Joint plot
+sns.jointplot(x)
+\end{lstlisting}
+    \end{block}
+
+    \begin{center}
+      \includegraphics[width=.4\textwidth]{img/scatterplot_matrix}
+      \includegraphics[width=.4\textwidth]{img/joint}
+    \end{center}
+

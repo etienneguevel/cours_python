@@ -1,0 +1,690 @@
+\documentclass[10pt]{beamer}
+
+
+\input{../pages/includes}
+\input{../pages/header}
+% define a violet color for a single colored block title
+\definecolor{violet}{HTML}{8A2BE2}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{}
+  \centering
+  \Large
+  \textbf{Partie 4}
+
+  \textbf{Packaging, tests unitaires et qualité de code}
+\end{frame}
+
+
+\section{Rappels}
+
+\begin{frame}[fragile]{Structurer un programme, version simple}
+
+  \begin{block}{Structure en plusieurs fichiers}
+    \begin{itemize}
+      \item Un ou plusieurs modules contenant les fonctionnalités implémentées
+      \item Un programme principal
+    \end{itemize}
+  \end{block}
+
+\bigskip
+
+\begin{lstlisting}[numbers=none]
+my_project/
+  - module1.py
+  - module2.py
+  - main.py
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Structurer un programme, version simple}
+
+  \underline{Cas 1} : un seul fichier avec l'instruction \texttt{if \_\_name\_\_ == "\_\_main\_\_"}
+
+\begin{lstlisting}[language=python, numbers=none]
+import math
+import sys
+
+def prod(a, b):
+    return a * b
+
+def add(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print(add(1, 2))
+    print(prod(1, 2))
+\end{lstlisting} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Structurer un programme, version simple}
+
+  \underline{Cas 2} : deux fichiers
+
+  \texttt{module1.py}
+\begin{lstlisting}[language=python, numbers=none]
+import math
+import sys
+
+def prod(a, b):
+    return a * b
+
+def add(a, b):
+    return a + b
+\end{lstlisting} 
+
+\texttt{main.py}
+
+\begin{lstlisting}[language=python, numbers=none]
+from module1 import add, prod
+print(add(1, 2))
+print(prod(1, 2))
+\end{lstlisting} 
+\end{frame}
+
+
+\begin{frame}[fragile]{Structurer un programme, version simple}
+
+  \begin{block}{Problème !}
+    \medskip
+
+    Si les fichiers \texttt{main.py} et \texttt{module1.py} sont dans le même dossier, vous pouvez faire
+\begin{lstlisting}[language=bash, numbers=none]
+python main.py
+\end{lstlisting}
+
+  Sinon, ça ne fonctionnera pas !
+  \end{block}
+\end{frame}
+
+
+
+\section{Packaging}
+
+\begin{frame}[fragile]{Qu'est ce qu'un package ?}
+
+  \begin{block}{Un package python est }
+    \medskip
+    \begin{enumerate}
+      \item un \textcolor{red}{ensemble de modules} organisés en dossiers et sous-dossiers
+      \item un moyen de créer des libraries spécifiques à un \textcolor{red}{domaine particulier}
+      \item \textcolor{red}{installable} via pip ou conda
+      \item un moyen d'utiliser les fonctionnalités dans \textcolor{red}{un autre package}
+    \end{enumerate}
+
+    Par exemple :
+    \begin{itemize}
+      \item SciPy : dédié au calcul scientifique
+      \item NumPy : dédié au calcul numérique et matriciel
+      \item Pandas : manipulation de tableaux de données et analyses statistiques
+      \item Matplotlib : dédié à la visualisation de données
+    \end{itemize}
+  \end{block}
+  
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Exemple}
+
+\begin{lstlisting}[numbers=none]
+package_folder/
+  - README.md	
+  - pyproject.toml
+  - mypackage/
+    - __init__.py
+    - mymodule.py
+    - mymodule2.py
+  - test/
+    - test_mymodule.py
+    - test_mymodule2.py
+\end{lstlisting}
+
+Installation de la librairie
+\begin{lstlisting}[numbers=none]
+pip install package_folder
+\end{lstlisting}
+
+Utilisation :
+\begin{lstlisting}[language=python, numbers=none]
+>>> from mypackage import mymodule
+>>> mymodule.sum(1, 1)
+2
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fichier \texttt{\_\_init\_\_.py}}
+  
+  \begin{itemize}
+    \item Fichier nécessaire pour importer le dossier en tant que package
+    \item Il est en général vide mais il peut contenir des instructions comme par exemple la version du package
+    \item Plus generalement, il faut aussi créer un fichier \_\_init\_\_.py dans chaque sous-dossier.
+  \end{itemize}
+\begin{lstlisting}[language=python, numbers=none]
+__version__ = "0.0.0"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Fichier \texttt{README.md}}
+  Le fichier \texttt{README.md} est un fichier de documentation, écrit en langage ``Markdown'', comme dans les Notebooks Jupyter.
+
+  Il doit décrire précisément les fonctionnalités implémentées dans le packages
+\end{frame}
+
+
+\begin{frame}[fragile]{Fichier \texttt{pyproject.toml}}
+  Le fichier \texttt{pyproject.toml} permet de configurer et d'installer le package.
+  Il est ecrit en blocs permettant de le configurer selon les specificites du
+  projet.
+
+\begin{lstlisting}[language=python, numbers=none, basicstyle=\ttfamily\scriptsize]
+  [project]
+  # Nom du package pour l'appeler
+  name = "cours_python" 
+  # Version du package -> utile pour projets longs
+  version = "0.1.0" 
+  authors = [
+    {name = "Etienne Guevel", email="etienne.guevel@sorbonne-universite.fr"},
+  ]
+  description = "Package exemple pour le cours python-ISUP 2025"
+  # Versions de python compatibles
+  requires-python = ">=3.10" 
+  # Liste des packages necessaires, avec leur version
+  dependencies = [ 
+    "matplotlib>=3.10.7",
+    "pandas>=2.3.3",
+    "seaborn>=0.13.2",
+  ]
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fichier \texttt{pyproject.toml}}
+  Le mode d'installation, et les fichiers a installer peuvent aussi etre configure.  
+  Plus d'informations sur les modes d'installation ici :  
+
+
+  \footnotesize\textcolor{blue}{\url{https://packaging.python.org/en/latest/guides/writing-pyproject-toml/}}
+
+
+
+  \begin{lstlisting}[language=python, numbers=none]
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+# On indique les chemins des packages
+where = ["."]
+# On indique les packages
+include = ["cours_python"]
+# On peut exclure certains dossiers du package
+exclude = []
+namespaces = false
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Installation}
+
+Une fois que l'on a rempli le \texttt{pyproject.toml} on peut l'installer 
+dans notre python avec \texttt{pip} :
+
+\begin{lstlisting}[numbers=none]
+pip install path/to/my/package # . si on est dans le package
+\end{lstlisting}
+
+L'option \textbf{\texttt{-e}} permet d'installer le package en mode
+éditable : si on modifie le code dans le package, pas besoin de le réinstaller
+python ira chercher directement dans le code !
+
+\begin{lstlisting}[numbers=none]
+pip install -e .
+\end{lstlisting}
+
+\end{frame}
+
+
+\section{Tests unitaires}
+
+\begin{frame}[fragile]{Tests unitaires}
+  
+  \onslide<1->
+  \begin{block}{Définition}
+    \medskip    
+    Un test unitaire est une routine permettant de vérifier le bon fonctionnement d'une fonction du package.
+  \end{block}
+
+  \onslide<2->
+  \begin{exampleblock}{Par exemple}
+\begin{lstlisting}[language=python, numbers=none]
+def generate(number):
+  return np.random.normal(0, 1, number)
+\end{lstlisting}
+  \end{exampleblock}
+  
+  \onslide<3->
+  Comment tester la function \texttt{generate} ?
+  \begin{itemize}
+    \item Est-ce que \texttt{generate(10)} est un \texttt{np.array} ?
+    \item Est-ce que \texttt{generate(10)} donne la bonne distribution ?
+    \item Est-ce que \texttt{len(generate(10))} est effectivement 10 ?
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implémenter des tests unitaires}
+
+  \begin{block}{Les clés pour implémenter des tests}
+    \medskip
+
+    \begin{enumerate}
+      \item<+-> Les fonctions de test sont placées dans un dossier \texttt{test/}
+      \item<+->Les fonctions de test utilisent le mot clé ``assert''
+\begin{lstlisting}[language=python, numbers=none, morekeywords=assert]
+from mypackage.mymodule import generate
+def test_generate():
+    assert len(generate(10)) == 10
+\end{lstlisting}
+      \item<+-> Conventions pour les noms des fonctions de test
+        \begin{itemize}
+          \item<+-> Un \textcolor{blue}{module de test} par module de package.
+          
+          Ex : pour \textcolor{blue}{tester le module} \texttt{mymodule.py}, le nom du fichier de test sera \texttt{test\_mymodule.py}
+          \item<+-> Une \textcolor{red}{fonction de test} par fonction testée. 
+          
+          Ex : pour \textcolor{red}{tester la fonction} \texttt{generate}, le nom de la fonction de test sera \texttt{test\_generate}
+        \end{itemize}
+    \end{enumerate}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Exemple}
+
+  Pour tester la fonction
+  \begin{overprint}
+
+    \onslide<1>
+\begin{lstlisting}[language=python, numbers=none]
+def hello(name):
+    return f"Hello {name}"
+\end{lstlisting}
+
+le test est 
+\begin{lstlisting}[language=python, numbers=none]
+def test_hello():
+    assert hello("python") == "Hello python"
+\end{lstlisting}
+
+Pour tester cette fonction on peut utiliser le package python \texttt{pytest},
+qui permet d'exécuter tous les tests présents dans un dossier / fichier, et de
+résumer leurs résultats.
+
+    \onslide<2>
+\begin{lstlisting}[language=python, numbers=none]
+def hello(name):
+    # Une erreur a ete introduite ici
+    return f"Hello name"
+\end{lstlisting}
+
+le test est 
+\begin{lstlisting}[language=python, numbers=none]
+def test_hello():
+    assert hello("python") == "Hello python"
+\end{lstlisting}
+
+
+\begin{center}
+  \includegraphics[width=\textwidth]{img/pytest_error.png}
+\end{center}
+
+
+\end{overprint}
+
+\end{frame}
+
+
+\begin{frame}{Quelques conseils}
+  \begin{block}{Il est important}
+    \medskip
+    \begin{itemize}
+      \item<+-> d'implémenter des modules python \textbf{par thème}
+      \item<+-> d'implémenter une fonction par ``fonctionnalité'' et éviter du code trop lourd
+      \item<+-> de proscrire la \textbf{duplication de code}
+      \item<+-> de tester chaque fonctionnalité en un \textbf{minimum de code}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Outils de tests unitaires : Pytest}
+  
+  \begin{block}{Deux packages à connaitre}
+    \medskip
+    \begin{itemize}
+      \item<+-> \texttt{pytest} : à la racine du projet, exécuter dans un terminal
+\begin{lstlisting}[language=python, numbers=none]
+python -m pytest -v
+\end{lstlisting}
+      \item<+-> \texttt{pytest-cov} : un plugin pour mesurer la couverture des tests
+\begin{lstlisting}[language=python, numbers=none]
+python -m pytest -v --cov
+\end{lstlisting}
+
+  \end{itemize}
+  \end{block}
+  
+  \onslide<3>{
+    Le package \texttt{unittest} est également utilisé pour implémenter des tests unitaires avec une syntaxe différente de \texttt{pytest}.
+  }
+\end{frame}
+
+\begin{frame}{A vous de jouer}
+
+  \begin{block}{Dans votre package}
+    \medskip
+    \begin{itemize}
+      \item Implémentez des tests unitaires pour \textbf{chacune des fonctions}
+      \item Exécutez les tests avec \texttt{pytest}
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+
+
+
+\section{Qualité de code}
+
+\begin{frame}{PEP8}
+
+  \begin{block}{PEP8 -- Style de code}
+    \medskip
+    Les Python Enhancement Proposals, ou PEP, sont un ensemble de recommandations liées au langage python.
+
+    La PEP8 définit des conventions \textbf{assez restrictives} de style de code.
+  \end{block}
+
+  Page officielle : \url{peps.python.org/pep-0008}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{Longueur des lignes}
+    \medskip
+    La PEP8 recommande entre 80 et 100 charactères maximum -> cela permet d'ouvrir
+    deux fichiers sur une même fenêtre et de voir tous le code dessus.
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{Indentation}
+    \medskip
+    Utiliser une identation à \textbf{4 espaces exactement} et ne pas utiliser de \textbf{tabulation}.
+    
+    Exemple pour un appel de fonction
+\begin{lstlisting}[language=python, numbers=none, basicstyle=\ttfamily\scriptsize]
+foo = long_function_name(
+    var_one, var_two, var_three, var_four
+)
+\end{lstlisting}
+
+ou bien
+
+\begin{lstlisting}[language=python, numbers=none, basicstyle=\ttfamily\scriptsize]
+foo = long_function_name(
+    var_one,
+    var_two,
+    var_three,
+    var_four
+)
+\end{lstlisting}
+      
+  \end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{Blocs de code et retours à la ligne}
+    \medskip
+    Coder des blocs de code \textbf{cohérents}
+    
+    Séparés les blocs de code par un \textbf{unique} retour à la ligne.
+  \end{block}
+
+  \begin{block}{Encoding et langue}
+    \medskip
+    Utiliser l'anglais et proscrire les caractères spéciaux (encodage UTF-8)
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{Imports}
+    \medskip
+    \begin{itemize}
+      \item Un import par ligne
+      \item Préférer les imports \textbf{absolus}
+      \item Ordre des imports : package de la librairie standard, librairies installées puis librairies locales
+
+Par exemple :
+\begin{lstlisting}[language=python, numbers=none]
+import os
+import sys
+import time
+
+import numpy as np
+
+import mypackage
+\end{lstlisting}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{Chaîne de charactères}
+    \medskip
+    Il est possible de définir des chaînes de caractères avec " " ou bien ' '.
+
+    PEP8 ne donne pas de recommandation mais il est important de ne pas utiliser les deux façons de faire (uniformisation du code)
+  \end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{``Whitespaces'' dans les expressions}
+    \medskip
+    Proscrire les `espaces blancs' inutiles dans les situations suivantes
+  \end{block}
+
+  Correct :
+\begin{lstlisting}[language=python, numbers=none]
+spam(ham[1], {eggs: 2})
+foo = (0,)
+if x == 4: print(x, y); x, y = y, x
+spam(1)
+dct['key'] = lst[index]
+\end{lstlisting}
+
+Incorrect :
+\begin{lstlisting}[language=python, numbers=none]
+spam( ham[ 1 ], { eggs: 2 } )
+bar = (0, )
+if x == 4 : print(x , y) ; x , y = y , x
+spam (1)
+dct ['key'] = lst [index]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{``Whitespaces'' dans les expressions (suite)}
+    \medskip
+    Proscrire les `espaces blancs' inutiles dans les situations suivantes
+  \end{block}
+
+  Correct :
+\begin{lstlisting}[language=python, numbers=none]
+x = 1
+y = 2
+long_variable = 3
+\end{lstlisting}
+
+Incorrect :
+\begin{lstlisting}[language=python, numbers=none]
+x             = 1
+y             = 2
+long_variable = 3
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{``Whitespaces'' dans les expressions (suite)}
+    \medskip
+    Proscrire les `espaces blancs' inutiles dans les situations suivantes
+  \end{block}
+
+  Correct :
+\begin{lstlisting}[language=python, numbers=none]
+def complex(real, imag=0.0):
+    return magic(r=real, i=imag)
+\end{lstlisting}
+
+Incorrect :
+\begin{lstlisting}[language=python, numbers=none]
+def complex(real, imag = 0.0):
+    return magic(r = real, i = imag)
+\end{lstlisting}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{``Whitespaces'' dans les expressions (suite)}
+    \medskip
+    MAIS ne pas supprimer tous les espaces blancs, par souci de lisibilité !
+  \end{block}
+
+  Correct :
+\begin{lstlisting}[language=python, numbers=none]
+i = i + 1
+submitted += 1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)
+\end{lstlisting}
+
+Incorrect :
+\begin{lstlisting}[language=python, numbers=none]
+i=i+1
+submitted +=1
+x = x * 2 - 1
+hypot2 = x * x + y * y
+c = (a + b) * (a - b)
+\end{lstlisting}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Conventions PEP8 à retenir}
+  \begin{block}{Docstrings}
+    \medskip
+    Les docstrings sont des commentaires insérés dans le code, en début de modules ou de fonctions.
+    Ils résument ce que fait la fonction et indiquent quels sont les arguments et les valeurs de retour.
+  \end{block}
+
+\begin{lstlisting}[language=python, numbers=none]
+def sample(n):
+    """
+    Get a sample from Gaussian distribution
+
+    Args:
+        n: the number of desired normal values
+
+    Returns
+        A sequence of n Gaussian values
+    """
+    return normal(0, 1, number)
+\end{lstlisting}
+
+  Voir aussi la PEP257 : \url{peps.python.org/pep-0257}
+\end{frame}
+
+\begin{frame}{Conventions PEP8 à retenir}
+  \begin{block}{Conventions de nommage}
+    \medskip
+    Il existe différentes façon de nommer en python :
+    \begin{itemize}
+      \item \texttt{lowercase} ou \texttt{snake\_case}
+      \item \texttt{lowercase\_with\_underscores}
+      \item \texttt{UPPERCASE}
+      \item \texttt{UPPERCASE\_WITH\_UNDERSCORES}
+      \item \texttt{CapitalizedWords}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}{Conventions PEP8 à retenir}
+  \begin{block}{Conventions de nommage}
+    \medskip
+    Les conventions de nommage sont les suivantes :
+    \begin{itemize}
+      \item Packages : court, \texttt{lowercase}
+      \item Modules : court, \texttt{lowercase} ou \texttt{lowercase\_with\_underscores}
+      \item Classes : \texttt{CapitalizedWords}
+      \item Variables locales : \texttt{lowercase} ou \texttt{lowercase\_with\_underscores}
+      \item Variables globales : \texttt{UPPERCASE} ou \texttt{UPPERCASE\_WITH\_UNDERSCORES}
+    \end{itemize}
+
+  \end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Package \texttt{pylint}}
+  \begin{block}{Analyse de code}
+    \medskip
+    \texttt{pylint} est un outil permettant de mesurer la qualité de code selon les conventions de la PEP8 et met une note sur 10
+  \end{block}
+
+  A la racine de votre package
+\begin{lstlisting}[numbers=none]
+python -m pylint mypackage
+\end{lstlisting}
+
+  ou simplement
+\begin{lstlisting}[numbers=none]
+python -m pylint mymodule.py
+\end{lstlisting}
+    
+\end{frame}
+
+\begin{frame}[fragile]{A vous de jouer}
+
+  \begin{enumerate}
+    \item Placez-vous à la racine de votre package et exécutez \texttt{pylint}
+\begin{lstlisting}[numbers=none]
+python -m pylint mypackage
+\end{lstlisting}
+    \item Quelle est votre note sur 10 ?
+    \item Améliorez votre code et exécutez à nouveau \texttt{pylint}
+  \end{enumerate}
+  
+\end{frame}
+
+\end{document}
