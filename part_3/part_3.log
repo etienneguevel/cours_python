@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.17)  20 SEP 2025 18:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.17)  24 SEP 2025 21:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1336,8 +1336,15 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
 [50
 
 ]
+\openout4 = `part_3.vrb'.
+
+ (./part_3.vrb)
 
 [51
+
+]
+
+[52
 
 ]
 \openout4 = `part_3.vrb'.
@@ -1346,13 +1353,6 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 3.
 )
-
-[52
-
-]
-\openout4 = `part_3.vrb'.
-
- (./part_3.vrb)
 
 [53
 
@@ -1371,6 +1371,9 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 [55
 
 ]
+\openout4 = `part_3.vrb'.
+
+ (./part_3.vrb)
 
 [56
 
@@ -1387,23 +1390,20 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 [59
 
 ]
-<img/heritage.png, id=423, 372.39125pt x 325.215pt>
-File: img/heritage.png Graphic file (type png)
-<use img/heritage.png>
-Package pdftex.def Info: img/heritage.png  used on input line 820.
-(pdftex.def)             Requested size: 153.64493pt x 134.18262pt.
-
 
 [60
 
- <./img/heritage.png>]
-\openout4 = `part_3.vrb'.
+]
+<img/heritage.png, id=429, 372.39125pt x 325.215pt>
+File: img/heritage.png Graphic file (type png)
+<use img/heritage.png>
+Package pdftex.def Info: img/heritage.png  used on input line 841.
+(pdftex.def)             Requested size: 153.64493pt x 134.18262pt.
 
- (./part_3.vrb)
 
 [61
 
-]
+ <./img/heritage.png>]
 \openout4 = `part_3.vrb'.
 
  (./part_3.vrb)
@@ -1439,6 +1439,9 @@ Package pdftex.def Info: img/heritage.png  used on input line 820.
 [66
 
 ]
+\openout4 = `part_3.vrb'.
+
+ (./part_3.vrb)
 
 [67
 
@@ -1453,6 +1456,10 @@ Package pdftex.def Info: img/heritage.png  used on input line 820.
 ]
 
 [70
+
+]
+
+[71
 
 ]
 \tf@nav=\write7
@@ -1473,18 +1480,18 @@ Package rerunfilecheck Info: File `part_3.out' has not changed.
 (rerunfilecheck)             Checksum: 243637C93030477E638ABE732EAFB399;806.
  ) 
 Here is how much of TeX's memory you used:
- 42346 strings out of 473190
- 977392 string characters out of 5715800
- 1862444 words of memory out of 5000000
- 64531 multiletter control sequences out of 15000+600000
+ 42352 strings out of 473190
+ 977443 string characters out of 5715800
+ 1861480 words of memory out of 5000000
+ 64533 multiletter control sequences out of 15000+600000
  570044 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,13n,126p,1969b,1561s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb>
-Output written on part_3.pdf (70 pages, 298971 bytes).
+Output written on part_3.pdf (71 pages, 300328 bytes).
 PDF statistics:
- 579 PDF objects out of 1000 (max. 8388607)
- 471 compressed objects within 5 object streams
- 146 named destinations out of 1000 (max. 500000)
+ 585 PDF objects out of 1000 (max. 8388607)
+ 476 compressed objects within 5 object streams
+ 148 named destinations out of 1000 (max. 500000)
  99 words of extra memory for PDF output out of 10000 (max. 10000000)
 

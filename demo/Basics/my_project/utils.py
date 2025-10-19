@@ -14,7 +14,8 @@ def print_lecture(sorcier, cours):
             else:
                 cours_suivis.append(cours)
                 print(f"{sorcier} s'inscrit au cours de {cours}.")
-        case {"statut": "professeur", "retired":False, "cours": list(cours_suivis)}:
+
+        case {"statut": "professeur", "retired": False, "cours": list(cours_suivis)}:
             if cours in cours_suivis:
                 print(f"{sorcier} enseigne le cours de {cours}.")
             

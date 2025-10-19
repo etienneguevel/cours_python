@@ -5,10 +5,15 @@ list_coordinates = [
     (120, "Londres")
 ]
 
+test = []
 for city in list_coordinates:
     match city:
         case str(city), *_, (float(lon), float(lat)):
-            print(f"{city:15} | {lat:9} | {lon:9}")
+            output = f"{city:15} | {lat:9.1f} | {lon:9}"
+            print(output)
+            test.append(output)
         
         case _:
             print("Wrong city format")
+
+print(*test, sep="\n")

@@ -1,5 +1,3 @@
-\frametitle{Fonction \texttt {super}}
-\begin{lstlisting}[language=python, numbers=none, morekeywords={super}]
 class Person:
     def __init__(self, firstname, lastname):
         self.firstname = firstname
@@ -8,15 +6,14 @@ class Person:
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
 
+
 class Student(Person):
     def __init__(self, firstname, lastname, university):
-        Person.__init__(self, firstname, lastname)
-
-        self.university = university
-
-
-
-
+        super().__init__(firstname, lastname)
+        self.university = university        
+    
     def get_university(self):
         return self.university
-\end{lstlisting}
+    
+Etienne = Student("Etienne", "Guevel", "Sorbonne Université")
+print(Etienne.firstname, Etienne.lastname, "est étudiant à", Etienne.get_university())
